@@ -1,3 +1,12 @@
+# Getting Started FRONT
+
+Docker:
+open Docker desktop;
+run: docker-compose up --build (only once)
+connect: docker-compose up
+go to port 3000 ( localhost:3000)
+disconnect: docker-compose down
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
