@@ -27,6 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          node-version: '16'
           push: true
           context: "{{defaultContext}}:client"
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/quete1902:latest
