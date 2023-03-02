@@ -1,38 +1,117 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+  --black: #181F1C;
+  --blue-light: #B1DDF1;
+  --grey-dark: #8A817C;
+  --green-dark: #073b3a;
+  --green-light: #9AE19D;
+  --green-warm: #D6FFB7;
+  --white-lavender: #EEEEFF;
+  --red: #a4031f;
+
+  --font: 'Roboto', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--white-lavender);
+  color: var(--black);
+  font-family: var(--font);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  color: var(--green-dark);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+span {
+  color: var(--red);
+}
+
+.navigation-wrapp {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+}
+
+.navigation-wide {
+  width: 50vw;
+}
+
+.navigation-narrow {
+  width: 20vw;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--green-dark);
+  font-family: var(--font);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.link:hover {
+  transition: transform 0.5s;
+  scale: 1.1;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.login-wrapp {
   display: flex;
   flex-direction: column;
+  width: 30%;
+}
+
+.login-title {
+  color: var(--green-dark);
+  font-family: var(--font);
+  font-weight: 700;
+}
+
+.wrapp {
+  display: flex;
+  padding: 5px 0;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.wrapp label {
+  color: var(--green-dark);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.wrapp input {
+  border-radius: 4px;
+  padding: 7px;
+  margin-left: 10px;
+  width: 70%;
+}
+
+.wrapp input,
+.wrapp input:focus,
+.wrapp select:focus,
+.wrapp input:focus-visible,
+.wrapp select:focus-visible {
+  background-color: var(--white-lavender);
+  border: 0.1px solid var(--grey-dark);
+  outline: transparent;
+}
+
+.submit-button {
+  padding: 7px 20px;
+  width: 100%;
+  background-color: var(--green-light);
+  border: 1px solid var(--green-light);
+  border-radius: 4px;
+  margin-top: 10px;
 }
