@@ -7,7 +7,7 @@ connect: docker-compose up
 go to port 3000 ( localhost:3000)
 disconnect: docker-compose down
 
--
+CI test
 
 # Getting Started with Create React App
 
