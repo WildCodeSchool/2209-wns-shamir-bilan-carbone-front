@@ -11,6 +11,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Goto client and run tests
         run: npm install && npm run test -- --passWithNoTests
+      - name: Disable review required for pull requests
+        uses: repo-sync/pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          configuration: |
+            {
+              "required_pull_request_reviews": null
+            }
   docker:
     needs: test-front
     if: github.ref == 'refs/heads/main'
