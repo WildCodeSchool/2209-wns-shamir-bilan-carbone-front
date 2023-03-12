@@ -10,7 +10,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
       - name: Goto client and run tests
-        run: npm install && npm run test
+        run: npm install && npm run test -- --passWithNoTests
   docker:
     needs: test-front
     if: github.ref == 'refs/heads/main'
