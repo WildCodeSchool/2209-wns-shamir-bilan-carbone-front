@@ -12,11 +12,10 @@ export const AGRIBALYSE_QUERY = gql`
 `;
 
 export const GETALL_USERS = gql`
-  query getAllUsers {
+  query GetAllUsers {
     getAllUsers {
       id
       email
-      role
       firstName
       lastName
     }
