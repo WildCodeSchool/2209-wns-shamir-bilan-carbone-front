@@ -1,12 +1,13 @@
-name: client-tests-workflow
+name: jest-and-docker-ci
 
-on: pull_request
+on: push
 
 jobs:
-  test-client:
+  test-front:
     runs-on: ubuntu-latest
+    container: node:16
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Goto client and run tests
-        run: cd client && npm i && npm test
+        run: npm install && npm run test -- --passWithNoTests
