@@ -9,7 +9,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Goto client and run tests
-        run: cd client && npm i && npm test
+        run: npm install && npm run test
   docker:
     needs: test-front
     if: github.ref == 'refs/heads/main'
@@ -27,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          node-version: '16'
+          node-version: "16"
           push: true
           context: "{{defaultContext}}:client"
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/quete1902:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/justReduceFront:latest
