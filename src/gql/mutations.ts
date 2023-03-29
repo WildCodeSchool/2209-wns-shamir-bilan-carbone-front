@@ -5,3 +5,13 @@ export const GET_TOKEN = gql`
     getToken(password: $password, email: $email)
   }
 `;
+
+export const REGISTER_USER = gql`
+  mutation CreateUser($data: RegisterInput!) {
+    createUser(data: $data) {
+      email
+      firstName
+      lastName
+    }
+  }
+`;

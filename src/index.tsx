@@ -11,6 +11,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
+import { AuthProvider } from "./context/authContext";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:5002/graphql",
@@ -35,13 +36,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <BrowserRouter>
-      <ApolloProvider client={client}>
-        <App />
-      </ApolloProvider>
+      <AuthProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </ApolloProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

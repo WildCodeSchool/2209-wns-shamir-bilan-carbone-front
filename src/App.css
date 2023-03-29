@@ -50,16 +50,20 @@ span {
 
 .link {
   text-decoration: none;
-  color: var(--green-dark);
+  /* color: var(--green-dark);
   font-family: var(--font);
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: uppercase; */
+
+  color: var(var(--white-lavender));
+  margin-right: 10px;
+
 }
 
-.link:hover {
+/* .link:hover {
   transition: transform 0.5s;
   scale: 1.1;
-}
+} */
 
 .container {
   display: flex;
