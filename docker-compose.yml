@@ -4,6 +4,7 @@ services:
   front:
     build:
       dockerfile: "Dockerfile"
+      context: "."
     volumes:
       - ./:/app:rw,cached
     ports:
