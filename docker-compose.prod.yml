@@ -4,4 +4,4 @@ services:
   front:
     image: luciec3/just-reduce-front
     ports:
-      - 3000:3000
+      - 3000:80
