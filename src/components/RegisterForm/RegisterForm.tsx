@@ -100,12 +100,16 @@ export default function RegisterForm({ handleSignUp }: IRegisterFormProps) {
         variant="contained"
         onClick={(e) => handleSubmit(e)}
         sx={{
-          backgroundColor: "#4caf50",
+          // backgroundColor: "#4caf50",
+          backgroundColor: "#9AE19D",
+          color: "#073b3a",
           "&:hover": {
             backgroundColor: "#388e3c",
+            color: "white",
           },
           "&:active": {
             backgroundColor: "#1b5e20",
+            color: "white",
           },
         }}
       >

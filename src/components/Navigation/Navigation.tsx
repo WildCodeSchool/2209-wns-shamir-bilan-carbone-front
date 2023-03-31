@@ -17,7 +17,8 @@ const Navigation = () => {
       >
         <AppBar
           sx={{
-            backgroundColor: "#4caf50",
+            // backgroundColor: "#4caf50",
+            backgroundColor: "#9AE19D",
           }}
         >
           <Toolbar
@@ -36,7 +37,8 @@ const Navigation = () => {
               className="link"
               style={{
                 textDecoration: "none",
-                color: "white",
+                // color: "white",
+                color: "#073b3a",
                 marginRight: "10px",
                 fontWeight: "bold",
                 fontSize: "1.5rem",
@@ -45,7 +47,9 @@ const Navigation = () => {
               <div>Just Reduce</div>
             </Link>
 
-            {!authToken && <div>|</div>}
+            {!authToken && (
+              <div style={{ marginRight: "15px", color: "#073b3a" }}>|</div>
+            )}
 
             {authToken && (
               <Link
@@ -53,17 +57,24 @@ const Navigation = () => {
                 className="link"
                 style={{
                   textDecoration: "none",
-                  color: "white",
-                  marginRight: "10px",
+                  // color: "white",
+                  color: "#073b3a",
+                  marginRight: "15px",
                 }}
               >
-                My profile
+                Mon profile
               </Link>
             )}
 
             {authToken ? (
               <div
                 className="link"
+                style={{
+                  textDecoration: "none",
+                  // color: "white",
+                  color: "#073b3a",
+                  marginRight: "15px",
+                }}
                 onClick={() => {
                   localStorage.removeItem("token");
                   navigate(`/loginreal`);
@@ -78,7 +89,8 @@ const Navigation = () => {
                 className="link"
                 style={{
                   textDecoration: "none",
-                  color: "white",
+                  // color: "white",
+                  color: "#073b3a",
                   marginRight: "10px",
                 }}
               >

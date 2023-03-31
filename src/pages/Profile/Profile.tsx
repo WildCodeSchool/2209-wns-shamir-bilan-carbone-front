@@ -17,7 +17,7 @@ const Profile = () => {
 
   return (
     <div>
-      <p>My profile</p>
+      <p>Mon Profil</p>
       {data.getAllUsers.map((user: User) => (
         <p key={user.id}>{user.email}</p>
       ))}

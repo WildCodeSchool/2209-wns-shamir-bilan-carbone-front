@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1" gutterBottom>
-        Connexion
+        {/* Connexion */}
       </Typography>
       <LoginForm />
     </Container>

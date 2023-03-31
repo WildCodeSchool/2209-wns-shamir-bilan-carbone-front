@@ -7,7 +7,9 @@ const Nav = () => {
       <AppBar position="static">
         <Toolbar
           sx={{
-            backgroundColor: "#4caf50",
+            // backgroundColor: "#4caf50",
+            backgroundColor: "#9AE19D",
+
             // "&:hover": {
             //   backgroundColor: "#388e3c",
             // },

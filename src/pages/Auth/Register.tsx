@@ -35,7 +35,7 @@ export default function Register() {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography variant="h4" component="h1" style={{ paddingTop: "50px" }}>
         Création de compte
       </Typography>
       <RegisterForm handleSignUp={handleSignUp} />

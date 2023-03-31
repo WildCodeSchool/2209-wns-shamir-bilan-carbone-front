@@ -36,7 +36,7 @@ export default function LoginForm() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        height: 400,
+        height: 300,
       }}
     >
       <TextField
@@ -65,20 +65,41 @@ export default function LoginForm() {
       <Button
         variant="contained"
         sx={{
-          backgroundColor: "#4caf50",
+          // backgroundColor: "#4caf50",
+          backgroundColor: "#9AE19D",
+          color: "#073b3a",
           "&:hover": {
             backgroundColor: "#388e3c",
+            color: "white",
           },
           "&:active": {
             backgroundColor: "#1b5e20",
+            color: "white",
           },
         }}
         onClick={(e) => handleSubmit(e)}
       >
         Connexion
       </Button>
-      <Typography>Pas encore enregistré?</Typography>
-      <Link to="/register">Créer un compte</Link>
+      <Typography
+        variant="h6"
+        component="h6"
+        style={{
+          color: "#073b3a",
+          fontSize: "1em",
+        }}
+      >
+        Pas encore enregistré?
+      </Typography>
+      <Link to="/register" style={{ textDecoration: "none" }}>
+        <Typography
+          variant="h6"
+          component="h6"
+          style={{ color: "#a4031f", fontSize: "1em" }}
+        >
+          Créer un compte
+        </Typography>
+      </Link>
     </Box>
   );
 }
