@@ -1,5 +1,6 @@
 # Getting Started FRONT
 
+test
 Docker:
 open Docker desktop;
 run: docker-compose up --build (only once)
