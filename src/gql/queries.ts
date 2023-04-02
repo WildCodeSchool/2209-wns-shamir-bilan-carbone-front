@@ -21,3 +21,14 @@ export const GETALL_USERS = gql`
     }
   }
 `;
+
+export const GETALL_RECIPES = gql`
+  query GetAllRecipes {
+    getAllRecipes {
+      id
+      name
+      description
+      calcul
+    }
+  }
+`;
