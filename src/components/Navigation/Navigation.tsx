@@ -31,6 +31,21 @@ const Navigation = () => {
               margin: "auto",
             }}
           >
+            {authToken && (
+              <Link
+                to="/admin"
+                className="link"
+                style={{
+                  textDecoration: "none",
+                  // color: "white",
+                  color: "#073b3a",
+                  marginRight: "15px",
+                }}
+              >
+                Admin
+              </Link>
+            )}
+
             {/* <Box alignItems="right" sx={{ flexGrow: 1, textAlign: "right" }}> */}
             <Link
               to="/"
@@ -80,7 +95,7 @@ const Navigation = () => {
                   navigate(`/loginreal`);
                 }}
               >
-                logout
+                Logout
               </div>
             ) : (
               <Link
@@ -94,7 +109,7 @@ const Navigation = () => {
                   marginRight: "10px",
                 }}
               >
-                login
+                Login
               </Link>
             )}
             {/* </Box> */}

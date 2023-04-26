@@ -19,12 +19,19 @@ body {
   font-family: var(--font);
 }
 
-h1 {
+h1,
+h2 {
   color: var(--green-dark);
 }
 
-span {
+
+
+/* span {
   color: var(--red);
+} */
+
+.block-span {
+  display: block;
 }
 
 .navigation-wrapp {
@@ -65,11 +72,20 @@ span {
   scale: 1.1;
 } */
 
-.container {
+/* .container {
   display: flex;
   justify-content: center;
-  padding-top: 10vh;
+  align-items: center;
+  background-color: #B1DDF1;
+  height: 500px;
+  margin: 0 10px;
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    margin: 0 100px;
+  }
+} */
 
 .login-wrapp {
   display: flex;
@@ -118,4 +134,29 @@ span {
   border: 1px solid var(--green-light);
   border-radius: 4px;
   margin-top: 10px;
+}
+
+.btn-admin {
+  width: 200px !important;
+}
+
+.btn-admin-small {
+  min-width: 30px;
+}
+
+.inline {
+  display: inline-block !important;
+}
+
+.element-flex {
+  display: flex;
+  justify-content: start;
+}
+
+.left {
+  text-align: left;
+}
+
+.select-w {
+  min-width: 250px;
 }

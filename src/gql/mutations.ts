@@ -15,3 +15,31 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+export const CREATE_RECIPE = gql`
+  mutation Mutation(
+    $agribalyseIds: [Int!]!
+    $empreinte: String!
+    $description: String!
+    $name: String!
+  ) {
+    createRecipe(
+      agribalyseIds: $agribalyseIds
+      empreinte: $empreinte
+      description: $description
+      name: $name
+    ) {
+      id
+      name
+      description
+      calcul
+      agribalyses {
+        id
+        idAgr
+        subgroup
+        name
+        empreinte
+      }
+    }
+  }
+`;

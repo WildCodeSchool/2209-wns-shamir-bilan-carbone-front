@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const GETALL_ALIMENTS = gql`
+  query GetAllAliments {
+    getAllAliments {
+      id
+      idAgr
+      subgroup
+      name
+      empreinte
+    }
+  }
+`;
+
 export const AGRIBALYSE_QUERY = gql`
   query AgribalyseQuery {
     results {
