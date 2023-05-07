@@ -1,48 +1,81 @@
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const authToken = localStorage.getItem("token");
   console.log(authToken);
-
   return (
-    <div className="navigation-wrapp">
-      <div
-        className={
-          authToken
-            ? "navigation navigation-wide"
-            : "navigation navigation-narrow"
-        }
-      >
-        <Link to="/" className="link">
-          <div>Just Reduce</div>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      id={"navigationBar"}
+      className={""}
+      // bg="dark"
+      // variant="dark"
+    >
+      <Container className={"navbar-bg nav-container"}>
+        <Link className="navbar-brand" to="/">
+          <Navbar.Brand>Just Reduce</Navbar.Brand>
         </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            {authToken && (
+              <Link className="nav-link" to="/admin">
+                <Nav>Admin</Nav>
+              </Link>
+            )}
+          </Nav>
 
-        {!authToken && <div>|</div>}
+          <Nav>
+            {authToken && (
+              <NavDropdown title="Mon compte" id="collasible-nav-dropdown">
+                <Link to="/" className="dropdown">
+                  <NavDropdown.Item href="#action/3.1">
+                    Récapitulatif
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/" className="dropdown">
+                  <NavDropdown.Item href="#action/3.2">
+                    Paramètres
+                  </NavDropdown.Item>
+                </Link>
+                {/* <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Supprimer
+                </NavDropdown.Item> */}
+              </NavDropdown>
+            )}
 
-        {authToken && (
-          <Link to="/profile" className="link">
-            My profile
-          </Link>
-        )}
+            {authToken ? (
+              <Nav.Link
+                className="nav-link"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate(`/`);
+                }}
+              >
+                Logout
+              </Nav.Link>
+            ) : (
+              <Link className="nav-link" to="/loginreal">
+                <Nav>Connexion</Nav>
+              </Link>
+            )}
 
-        {authToken ? (
-          <div
-            className="link"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate(`/`);
-            }}
-          >
-            logout
-          </div>
-        ) : (
-          <Link to="/Login" className="link">
-            login
-          </Link>
-        )}
-      </div>
-    </div>
+            {/* {authToken && (
+              <Link className="nav-link" to="/admin">
+                <Nav>Admin</Nav>
+              </Link>
+            )} */}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
