@@ -43,3 +43,9 @@ export const CREATE_RECIPE = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($email: String!) {
+    deleteUser(email: $email)
+  }
+`;

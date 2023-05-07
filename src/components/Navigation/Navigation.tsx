@@ -1,122 +1,81 @@
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const authToken = localStorage.getItem("token");
   console.log(authToken);
-
   return (
-    <Box>
-      <div
-        className={
-          authToken
-            ? "navigation navigation-wide"
-            : "navigation navigation-narrow"
-        }
-      >
-        <AppBar
-          sx={{
-            // backgroundColor: "#4caf50",
-            backgroundColor: "#9AE19D",
-          }}
-        >
-          <Toolbar
-            sx={{
-              width: "50%",
-              // backgroundColor: "red",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "auto",
-            }}
-          >
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      id={"navigationBar"}
+      className={""}
+      // bg="dark"
+      // variant="dark"
+    >
+      <Container className={"navbar-bg nav-container"}>
+        <Link className="navbar-brand" to="/">
+          <Navbar.Brand>Just Reduce</Navbar.Brand>
+        </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
             {authToken && (
-              <Link
-                to="/admin"
-                className="link"
-                style={{
-                  textDecoration: "none",
-                  // color: "white",
-                  color: "#073b3a",
-                  marginRight: "15px",
-                }}
-              >
-                Admin
+              <Link className="nav-link" to="/admin">
+                <Nav>Admin</Nav>
               </Link>
             )}
+          </Nav>
 
-            {/* <Box alignItems="right" sx={{ flexGrow: 1, textAlign: "right" }}> */}
-            <Link
-              to="/"
-              className="link"
-              style={{
-                textDecoration: "none",
-                // color: "white",
-                color: "#073b3a",
-                marginRight: "10px",
-                fontWeight: "bold",
-                fontSize: "1.5rem",
-              }}
-            >
-              <div>Just Reduce</div>
-            </Link>
-
-            {!authToken && (
-              <div style={{ marginRight: "15px", color: "#073b3a" }}>|</div>
-            )}
-
+          <Nav>
             {authToken && (
-              <Link
-                to="/profile"
-                className="link"
-                style={{
-                  textDecoration: "none",
-                  // color: "white",
-                  color: "#073b3a",
-                  marginRight: "15px",
-                }}
-              >
-                Mon profile
-              </Link>
+              <NavDropdown title="Mon compte" id="collasible-nav-dropdown">
+                <Link to="/" className="dropdown">
+                  <NavDropdown.Item href="#action/3.1">
+                    Récapitulatif
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/" className="dropdown">
+                  <NavDropdown.Item href="#action/3.2">
+                    Paramètres
+                  </NavDropdown.Item>
+                </Link>
+                {/* <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Supprimer
+                </NavDropdown.Item> */}
+              </NavDropdown>
             )}
 
             {authToken ? (
-              <div
-                className="link"
-                style={{
-                  textDecoration: "none",
-                  // color: "white",
-                  color: "#073b3a",
-                  marginRight: "15px",
-                }}
+              <Nav.Link
+                className="nav-link"
                 onClick={() => {
                   localStorage.removeItem("token");
-                  navigate(`/loginreal`);
+                  navigate(`/`);
                 }}
               >
                 Logout
-              </div>
+              </Nav.Link>
             ) : (
-              <Link
-                // to="/Login"
-                to="/loginreal"
-                className="link"
-                style={{
-                  textDecoration: "none",
-                  // color: "white",
-                  color: "#073b3a",
-                  marginRight: "10px",
-                }}
-              >
-                Login
+              <Link className="nav-link" to="/loginreal">
+                <Nav>Connexion</Nav>
               </Link>
             )}
-            {/* </Box> */}
-          </Toolbar>
-        </AppBar>
-      </div>
-    </Box>
+
+            {/* {authToken && (
+              <Link className="nav-link" to="/admin">
+                <Nav>Admin</Nav>
+              </Link>
+            )} */}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

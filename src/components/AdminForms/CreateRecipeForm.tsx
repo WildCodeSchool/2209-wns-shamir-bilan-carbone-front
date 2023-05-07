@@ -13,7 +13,14 @@ interface AgribalyseData {
   empreinte: string;
 }
 
-export default function CreateRecipeForm() {
+interface CreateRecipeFormProps {
+  onTitleChange: (title: string) => void;
+  onDescriptionChange: (description: string) => void;
+  onCo2Change: (co2: any) => void;
+}
+
+// export default function CreateRecipeForm() {
+const CreateRecipeForm = (props: any) => {
   const animatedComponents = makeAnimated();
   const {
     data: queryData,
@@ -37,6 +44,7 @@ export default function CreateRecipeForm() {
         empreinteSum += parseFloat(alimentToConsider.empreinte);
       }
       setCalculEmpreinte((Math.floor(empreinteSum * 100) / 100).toString());
+      props.onCo2Change((Math.floor(empreinteSum * 100) / 100).toString());
     }
   }, [selectedAliments]);
 
@@ -48,10 +56,18 @@ export default function CreateRecipeForm() {
       (option: any) => option.value
     );
     setSelectedAliments(selectedAlimentIds);
+    // props.onCo2Change(selectedAlimentIds);
   };
 
+  const navigate = useNavigate();
   const [createRecipe, { loading: mutationLoading, error: mutationError }] =
-    useMutation(CREATE_RECIPE);
+    useMutation(CREATE_RECIPE, {
+      onCompleted: (mutationData) => {
+        if (mutationData.createRecipe) {
+          navigate("/");
+        }
+      },
+    });
 
   const handleCreateRecipe = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -81,7 +97,7 @@ export default function CreateRecipeForm() {
   console.log("alimentOptions", alimentOptions);
 
   return (
-    <Form onSubmit={handleCreateRecipe}>
+    <Form onSubmit={handleCreateRecipe} className={"createRecipeForm"}>
       <Form.Group className="mb-3">
         <Form.Label>Titre</Form.Label>
         <Form.Control
@@ -89,16 +105,22 @@ export default function CreateRecipeForm() {
           placeholder="titre"
           id="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            props.onTitleChange(e.target.value);
+          }}
         />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
-          rows={2}
+          rows={3}
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => {
+            setDescription(e.target.value);
+            props.onDescriptionChange(e.target.value);
+          }}
         />
       </Form.Group>
       <Select
@@ -116,4 +138,6 @@ export default function CreateRecipeForm() {
       </Button>
     </Form>
   );
-}
+};
+
+export default CreateRecipeForm;
