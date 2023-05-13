@@ -59,7 +59,7 @@ const AuthProvider = ({ children }: any) => {
   const [loadToken, { loading, error }] = useMutation(GET_TOKEN, {
     onCompleted: (data) => {
       localStorage.setItem("token", data.getToken);
-      navigate("/");
+      navigate("/profile");
     },
   });
 

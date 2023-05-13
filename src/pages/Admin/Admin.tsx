@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useMutation, useQuery } from "@apollo/client";
 import SearchField from "../../components/SearchField";
@@ -6,6 +7,7 @@ import CreateRecipeForm from "../../components/AdminForms/CreateRecipeForm";
 import { GETALL_RECIPES } from "../../gql/queries";
 import { GETALL_USERS } from "../../gql/queries";
 import { DELETE_USER } from "../../gql/mutations";
+import jwtDecode from "jwt-decode";
 
 interface Recipe {
   id: string;
@@ -23,6 +25,22 @@ interface User {
 }
 
 const Admin = () => {
+  // Check if has role Admin to access page /admin
+  const [userRole, setUserRole] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/loginreal");
+    } else {
+      const decodedToken = jwtDecode(token) as { role: string };
+      setUserRole(decodedToken.role);
+      if (decodedToken.role !== "ADMIN") {
+        navigate("/");
+      }
+    }
+  }, []);
+
   const {
     data: recipeData,
     loading: recipeLoading,

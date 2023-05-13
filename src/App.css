@@ -521,3 +521,23 @@ h2 {
     align-self: center;    
   } */
 }
+
+/* modify user */
+.btn-success {
+  /* background-color: var(--green) !important; */
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: var(--white);
+  color: var(--green);
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-left: 15px;
+  /* text-align: center; */
+}

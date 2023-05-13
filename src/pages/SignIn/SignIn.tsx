@@ -11,7 +11,7 @@ const SignIn = () => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate("/admin");
     }
   });
 
@@ -21,9 +21,9 @@ const SignIn = () => {
       password: password,
     },
     onCompleted(data) {
-      console.log(data.getToken);
+      // console.log(data.getToken);
       localStorage.setItem("token", data.getToken);
-      navigate("/");
+      navigate("/profile");
     },
     onError(error) {
       console.log(error);

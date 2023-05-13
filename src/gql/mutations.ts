@@ -49,3 +49,24 @@ export const DELETE_USER = gql`
     deleteUser(email: $email)
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation Mutation(
+    $lastName: String!
+    $firstName: String!
+    $email: String!
+    $updateUserId: Float!
+  ) {
+    updateUser(
+      lastName: $lastName
+      firstName: $firstName
+      email: $email
+      id: $updateUserId
+    ) {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`;
