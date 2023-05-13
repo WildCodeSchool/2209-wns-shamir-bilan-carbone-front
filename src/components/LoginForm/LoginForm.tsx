@@ -43,7 +43,7 @@ export default function LoginForm() {
         required
         id="outlined-required"
         label="Email"
-        // placeholder="pierre.durand@gmail.com"
+        placeholder="anna.mirren@gmail.com"
         InputLabelProps={{
           shrink: true,
         }}

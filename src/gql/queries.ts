@@ -44,3 +44,14 @@ export const GETALL_RECIPES = gql`
     }
   }
 `;
+
+export const GET_USER_BY_EMAIL = gql`
+  query ExampleQuery($email: String!) {
+    findUserByEmail(email: $email) {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`;
