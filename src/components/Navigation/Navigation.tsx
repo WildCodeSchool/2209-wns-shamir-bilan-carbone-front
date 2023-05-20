@@ -7,12 +7,7 @@ import { UPDATE_USER } from "../../gql/mutations";
 import EditUser from "../User/EditUser";
 import jwtDecode from "jwt-decode";
 import { StringLiteralType } from "typescript";
-
-interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
+import IUser from "../../interfaces/IUser";
 
 interface Props {
   userInfo: IUser;
