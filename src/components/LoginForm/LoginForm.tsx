@@ -32,7 +32,6 @@ export default function LoginForm() {
     <Box
       component="form"
       sx={{
-        // backgroundColor: 'white',
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
@@ -65,16 +64,15 @@ export default function LoginForm() {
       <Button
         variant="contained"
         sx={{
-          // backgroundColor: "#4caf50",
-          backgroundColor: "#9AE19D",
-          color: "#073b3a",
+          backgroundColor: "#32c481",
+          color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#388e3c",
-            color: "white",
+            backgroundColor: "#073b3a",
+            color: "#ffffff",
           },
           "&:active": {
-            backgroundColor: "#1b5e20",
-            color: "white",
+            backgroundColor: "#073b3a",
+            color: "#ffffff",
           },
         }}
         onClick={(e) => handleSubmit(e)}
@@ -95,7 +93,7 @@ export default function LoginForm() {
         <Typography
           variant="h6"
           component="h6"
-          style={{ color: "#a4031f", fontSize: "1em" }}
+          style={{ color: "#ff5154", fontSize: "1em" }}
         >
           Créer un compte
         </Typography>
