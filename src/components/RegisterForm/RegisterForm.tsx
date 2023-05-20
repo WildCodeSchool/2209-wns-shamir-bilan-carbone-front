@@ -46,7 +46,6 @@ export default function RegisterForm({ handleSignUp }: IRegisterFormProps) {
     <Box
       component="form"
       sx={{
-        // backgroundColor: "white",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
@@ -64,10 +63,20 @@ export default function RegisterForm({ handleSignUp }: IRegisterFormProps) {
         onChange={handleChange}
       />
       <TextField
+        id="outlined-number"
+        label="Nom"
+        type="text"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        name="lastName"
+        onChange={handleChange}
+      />
+      <TextField
         required
         id="outlined-required-2"
         label="Email"
-        // placeholder="pierre.durand@gmail.com"
+        placeholder="anna.mirren@gmail.com"
         InputLabelProps={{
           shrink: true,
         }}
@@ -79,37 +88,26 @@ export default function RegisterForm({ handleSignUp }: IRegisterFormProps) {
         id="outlined-password-input"
         label="Mot de passe"
         type="password"
-        // autoComplete="current-password"
+        autoComplete="current-password"
         InputLabelProps={{
           shrink: true,
         }}
         name="password"
         onChange={handleChange}
       />
-      <TextField
-        id="outlined-number"
-        label="Nom"
-        type="text"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        name="lastName"
-        onChange={handleChange}
-      />
       <Button
         variant="contained"
         onClick={(e) => handleSubmit(e)}
         sx={{
-          // backgroundColor: "#4caf50",
-          backgroundColor: "#9AE19D",
-          color: "#073b3a",
+          backgroundColor: "#32c481",
+          color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#388e3c",
-            color: "white",
+            backgroundColor: "#073b3a",
+            color: "#ffffff",
           },
           "&:active": {
-            backgroundColor: "#1b5e20",
-            color: "white",
+            backgroundColor: "#073b3a",
+            color: "#ffffff",
           },
         }}
       >

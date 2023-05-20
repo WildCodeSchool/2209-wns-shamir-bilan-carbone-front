@@ -1,18 +1,14 @@
 import { useState } from "react";
-
+import IUser from "../../interfaces/IUser";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
-
-interface Props {
-  userInfo: IUser;
-  handleUpdateUser: (
-    id: number,
+interface EditUserProps {
+  firstNamePayload?: string;
+  lastNamePayload?: string;
+  userInfo?: IUser;
+  handleUpdateUser?: (
+    // id: number,
     firstName: string,
     lastName: string
   ) => Promise<void>;
@@ -23,7 +19,7 @@ const EditUser = ({
   lastNamePayload,
   userInfo,
   handleUpdateUser,
-}: any | Props) => {
+}: any | EditUserProps) => {
   const [firstName, setFirstName] = useState(firstNamePayload);
   const [lastName, setLastName] = useState(lastNamePayload);
 
@@ -41,8 +37,8 @@ const EditUser = ({
 
   const handleModify = async () => {
     await handleUpdateUser(firstName, lastName);
-    setFirstName("");
-    setLastName("");
+    setFirstName(firstNamePayload);
+    setLastName(lastNamePayload);
     handleClose();
   };
 
@@ -75,6 +71,7 @@ const EditUser = ({
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="name"
                   type="text"
+                  name="firstName"
                   value={firstName}
                   onChange={handleFirstNameChanged}
                 />
@@ -95,6 +92,7 @@ const EditUser = ({
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="lastname"
                   type="text"
+                  name="lastName"
                   value={lastName}
                   onChange={handleLastNameChanged}
                 />

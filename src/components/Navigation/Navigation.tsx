@@ -6,20 +6,20 @@ import { GET_USER_BY_EMAIL } from "../../gql/queries";
 import { UPDATE_USER } from "../../gql/mutations";
 import EditUser from "../User/EditUser";
 import jwtDecode from "jwt-decode";
-import { StringLiteralType } from "typescript";
 import IUser from "../../interfaces/IUser";
 
-interface Props {
-  userInfo: IUser;
-  firstNamePayload: string;
-  handleUpdateUser: (
+interface NavigationProps {
+  userInfo?: IUser;
+  firstNamePayload?: string;
+  lastNamePayload?: string;
+  handleUpdateUser?: (
     id: number,
     firstName: string,
     lastName: string
   ) => Promise<void>;
 }
 
-const Navigation = ({ firstNamePayload, lastNamePayload }: any) => {
+const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
   const navigate = useNavigate();
   const authToken = localStorage.getItem("token");
   let isAdmin = false;
@@ -47,8 +47,8 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: any) => {
 
   const [updateUser] = useMutation(UPDATE_USER);
   const handleUpdateUser = async (
-    lastName: string,
     firstName: string,
+    lastName: string,
     email: string,
     updateUserId: number
     // password: string
@@ -57,8 +57,8 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: any) => {
       const response = await updateUser({
         variables: {
           // id: userData.findUserByEmail.id,
-          lastName: lastName,
           firstName: firstName,
+          lastName: lastName,
           email: userData.findUserByEmail.email,
           updateUserId: Number(userData.findUserByEmail.id),
           // password: password,
@@ -94,28 +94,17 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: any) => {
           <Nav>
             {authToken && (
               <NavDropdown title="Mon compte" id="collasible-nav-dropdown">
-                <Link to="/profile" className="dropdown">
-                  <NavDropdown.Item href="#action/3.1">
-                    Récapitulatif
-                  </NavDropdown.Item>
-                </Link>
-                <Link to="/profile" className="dropdown">
-                  <NavDropdown.Item href="#action/3.2">
-                    <EditUser
-                      firstNamePayload={userData.findUserByEmail.firstName}
-                      lastNamePayload={userData.findUserByEmail.lastName}
-                      handleUpdateUser={handleUpdateUser}
-                      userInfo={userData.findUserByEmail}
-                    />
-                  </NavDropdown.Item>
-                </Link>
-                {/* <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Supprimer
-                </NavDropdown.Item> */}
+                <Nav.Link as={Link} to="/profile">
+                  Récapitulatif
+                </Nav.Link>
+                <Nav.Link as={Link} to="/profile">
+                  <EditUser
+                    firstNamePayload={userData.findUserByEmail.firstName}
+                    lastNamePayload={userData.findUserByEmail.lastName}
+                    handleUpdateUser={handleUpdateUser}
+                    userInfo={userData.findUserByEmail}
+                  />
+                </Nav.Link>
               </NavDropdown>
             )}
 
