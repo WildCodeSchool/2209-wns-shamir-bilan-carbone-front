@@ -61,6 +61,9 @@ const AuthProvider = ({ children }: any) => {
       localStorage.setItem("token", data.getToken);
       navigate("/profile");
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   if (loading) return <div>Loading...</div>;
