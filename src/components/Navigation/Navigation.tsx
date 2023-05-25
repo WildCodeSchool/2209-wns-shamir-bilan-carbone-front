@@ -30,7 +30,8 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [userFirstName, setUserFirstName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  let isAdmin = false;
+  const [isAdmin, setIsAdmin] = useState(false); // Initialize isAdmin as a state variable
+  // let isAdmin = false;
   // let userFirstName = "";
   // let userEmail = "";
 
@@ -52,7 +53,8 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
         setUserEmail(tokenPayload.email);
       }
       if (tokenPayload && tokenPayload.role === "ADMIN") {
-        isAdmin = true;
+        setIsAdmin(true);
+        // isAdmin = true;
       }
     }
   }, [authToken]);
@@ -125,7 +127,7 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {isAdmin && (
+            {authToken && isAdmin && (
               <Link className="nav-link" to="/admin">
                 <Nav>Admin</Nav>
               </Link>
