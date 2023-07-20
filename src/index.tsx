@@ -14,7 +14,8 @@ import { setContext } from "@apollo/client/link/context";
 import { AuthProvider } from "./context/authContext";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5002/graphql",
+  // uri: "http://localhost:5002/graphql",
+  uri: "http://bilan-carbon-api.shamir1.wns.wilders.dev/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
