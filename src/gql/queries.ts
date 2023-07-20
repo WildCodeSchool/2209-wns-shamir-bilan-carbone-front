@@ -55,3 +55,22 @@ export const GET_USER_BY_EMAIL = gql`
     }
   }
 `;
+
+export const GETALL_CONS = gql`
+  query GetConsByUser($userId: Float!) {
+    getConsByUser(userId: $userId) {
+      id
+      empreinte
+      description
+      createdAt
+      recipes {
+        name
+        calcul
+      }
+      user {
+        id
+        email
+      }
+    }
+  }
+`;

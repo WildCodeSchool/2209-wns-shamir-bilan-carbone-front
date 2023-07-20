@@ -315,7 +315,8 @@ h2 {
 
 #homepage .block-1 button,
 #homepage .block-2 button,
-#homepage .block-3 button {
+#homepage .block-3 button,
+#profilePage button {
   margin-bottom: 2em;
   width: 250px;
   padding: 10px 20px;
@@ -330,7 +331,8 @@ h2 {
 
 #homepage .block-1 button:hover,
 #homepage .block-2 button:hover,
-#homepage .block-3 button:hover {
+#homepage .block-3 button:hover,
+#profilePage button:hover {
   background-color: var(--red-btn-hover);
 }
 
@@ -540,4 +542,62 @@ h2 {
   font-weight: 700;
   margin-left: 15px;
   /* text-align: center; */
+}
+
+/* PROFILE */
+.recipes-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 40%;
+  height: 700px;
+  border: 1px solid var(--green-dark);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.recipe-card:hover {
+  border-color: var(--green);
+  border-width: 3px;
+}
+
+.recipe-card h4 {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.recipe-card h5 {
+  padding: 10px 0px;
+}
+
+.recipe-card img {
+  width: 400px;
+  height: 300px;
+}
+
+.recipe-card .carbone {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.recipe-card .checkbox-recipe {
+  cursor: pointer;
+  transform: scale(2);
+  margin-left: 8px;
+}
+
+.custom-chart {
+  font-size: 12px;
+  border: 1px solid #ccc;
 }

@@ -70,3 +70,65 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+// export const CREATE_CONSUMPTION = gql`
+//   mutation CreateConsumption(
+//     $userId: Float!
+//     $recipeIds: [Int!]!
+//     $createdAt: DateTime!
+//     $description: String!
+//     $empreinte: String!
+//   ) {
+//     createConsumptionWithRecipeUser(
+//       userId: $userId
+//       recipeIds: $recipeIds
+//       createdAt: $createdAt
+//       description: $description
+//       empreinte: $empreinte
+//     ) {
+//       id
+//       empreinte
+//       description
+//       createdAt
+//       recipes {
+//         name
+//         calcul
+//       }
+//       user {
+//         id
+//         email
+//       }
+//     }
+//   }
+// `;
+
+export const CREATE_CONSUMPTION = gql`
+  mutation CreateConsumption(
+    $userId: Float!
+    $recipeIds: [String!]!
+    $createdAt: DateTime!
+    $description: String!
+    $empreinte: String!
+  ) {
+    createConsumptionWithRecipeUser(
+      userId: $userId
+      recipeIds: $recipeIds
+      createdAt: $createdAt
+      description: $description
+      empreinte: $empreinte
+    ) {
+      id
+      empreinte
+      description
+      createdAt
+      recipes {
+        name
+        calcul
+      }
+      user {
+        email
+        id
+      }
+    }
+  }
+`;

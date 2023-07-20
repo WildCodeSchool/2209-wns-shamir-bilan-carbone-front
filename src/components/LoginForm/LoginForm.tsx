@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import { Link } from "react-router-dom";
 
 interface LoginData {
   email: string;

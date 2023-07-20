@@ -42,7 +42,7 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
     setAuthToken(token);
   }, []);
 
-  // I add one more useEffect, on the changes of authToken it uploads userFirstName Avatar.
+  //  adding one more useEffect, on the changes of authToken it uploads userFirstName Avatar.
   useEffect(() => {
     if (authToken) {
       const tokenPayload: any = jwtDecode(authToken);
@@ -88,7 +88,7 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
 
       localStorage.setItem("token", response.data.updateUser.token);
       setUserFirstName(firstName.charAt(0).toUpperCase());
-
+      navigate("/");
       console.log("response", response);
     } catch (error) {
       console.log(error);
@@ -137,10 +137,10 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
           <Nav>
             {authToken && (
               <NavDropdown title="Mon compte" id="collasible-nav-dropdown">
-                <Nav.Link as={Link} to="/profile">
+                <Nav.Link as={Link} to="/profile/recap">
                   Récapitulatif
                 </Nav.Link>
-                <Nav.Link as={Link} to="/profile">
+                <Nav.Link as={Link} to="/profile/recap">
                   <EditUser
                     firstNamePayload={userData.findUserByEmail.firstName}
                     lastNamePayload={userData.findUserByEmail.lastName}
@@ -149,6 +149,12 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
                   />
                 </Nav.Link>
               </NavDropdown>
+            )}
+
+            {authToken && (
+              <Link className="nav-link" to="profile/recipes">
+                <Nav>Recettes</Nav>
+              </Link>
             )}
 
             {authToken ? (
