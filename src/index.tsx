@@ -18,6 +18,8 @@ const httpLink = createHttpLink({
   uri: "http://bilan-carbon-api.shamir1.wns.wilders.dev/graphql",
 });
 
+// updated url
+
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
   return {
