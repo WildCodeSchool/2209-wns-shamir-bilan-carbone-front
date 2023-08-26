@@ -64,7 +64,7 @@ const CreateRecipeForm = (props: any) => {
     useMutation(CREATE_RECIPE, {
       onCompleted: (mutationData) => {
         if (mutationData.createRecipe) {
-          navigate("/");
+          navigate("/admin");
         }
       },
     });

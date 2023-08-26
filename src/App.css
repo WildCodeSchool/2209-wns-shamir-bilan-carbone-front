@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 
 
 
@@ -21,6 +23,7 @@
   --black-text: #353535;
   --font: 'Roboto', sans-serif;
   --font-Martel: 'Martel', serif;
+  --font_manuscrit: 'Kaushan Script', cursive;
 }
 
 body {
@@ -329,6 +332,11 @@ h2 {
   box-shadow: 25px 0px 20px -20px rgba(0, 0, 0, 0.45);
 }
 
+#homepage .btn-link {
+  color: var(--white);
+  text-decoration: none;
+}
+
 #homepage .block-1 button:hover,
 #homepage .block-2 button:hover,
 #homepage .block-3 button:hover,
@@ -544,46 +552,60 @@ h2 {
   /* text-align: center; */
 }
 
-/* PROFILE */
+/* PROFILE PAGE */
 .recipes-container {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  row-gap: 10px;
-  column-gap: 10px;
+  row-gap: 50px;
+  column-gap: 50px;
 }
 
 .recipe-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   width: 40%;
-  height: 700px;
-  border: 1px solid var(--green-dark);
+  height: 300px;
   border-radius: 8px;
-  padding: 10px;
+  box-shadow: 0px 2px 1px -1px rgba(211, 211, 211, 0.45);
 }
 
 .recipe-card:hover {
-  border-color: var(--green);
-  border-width: 3px;
+  border-color: transparent;
+  box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45);
 }
 
 .recipe-card h4 {
-  color: var(--green);
-  font-weight: 700;
+  /* color: var(--green); */
+  color: var(--black-text);
+  font-weight: 500;
+  padding: 10PX 10px 0 10px;
+  ;
 }
 
 .recipe-card h5 {
-  padding: 10px 0px;
+  padding: 5px 10px 10px 10px;
+}
+
+.recipe-card p {
+  padding: 0px 10px;
+}
+
+.recipe-card .recipe-image-wrap {
+  width: 100%;
+  height: 50%;
 }
 
 .recipe-card img {
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .recipe-card .carbone {
@@ -594,7 +616,87 @@ h2 {
 .recipe-card .checkbox-recipe {
   cursor: pointer;
   transform: scale(2);
-  margin-left: 8px;
+  margin-left: 15px;
+}
+
+.custom-checkbox {
+  border: 2px solid var(--green);
+  background-color: white;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked+label {
+  background-color: var(--green);
+}
+
+#profilePage h2 {
+  line-height: 1.4;
+  color: var(--green);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@media screen and (min-width: 520px) {
+  #profilePage h2 {
+    padding: 0 25vw;
+  }
+}
+
+#profilePage h1 {
+  text-align: center;
+  line-height: 1.4;
+  color: var(--green-dark);
+  font-weight: 400;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: var(--font_manuscrit);
+  font-size: 1em;
+  ;
+}
+
+/* CONSUMPTION PAGE */
+
+.recapPage .choiceList {
+  text-align: left;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  width: 40%;
+  height: auto;
+  border-color: transparent;
+  box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45);
+}
+
+.recapPage .choiceList h2,
+.recapPage .choiceList h3 {
+  color: var(--black-text);
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
+
+.recapPage .choiceList span {
+  color: #32c481;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.recapPage .choiceList span.co2 {
+  color: #32c481;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.recapPage .chart-container h2 {
+  line-height: 1.4;
+  color: var(--green);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 40px;
 }
 
 .custom-chart {

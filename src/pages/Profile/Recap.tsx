@@ -1,7 +1,9 @@
 import { GETALL_CONS } from "../../gql/queries";
+import { GET_RECIPES_BY_IDS } from "../../gql/queries";
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { VictoryChart, VictoryLine, VictoryAxis } from "victory";
+import RecipeList from "../../components/Profile/RecipeList";
 
 interface ConsumptionData {
   x: Date;
@@ -11,18 +13,57 @@ interface ConsumptionData {
 const Recap = () => {
   const { userId } = useParams<{ userId: any }>();
 
+  // Parse the selectedRecipes parameter from the URL to get names of all selected recipes because I want to display them in Recap.
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedRecipesParam = queryParams.get("selectedRecipes");
+  const selectedRecipes = selectedRecipesParam
+    ? selectedRecipesParam.split(",")
+    : [];
+  console.log("printSelectedRecipes", selectedRecipes);
+  const selectedRecipeIds = [];
+  for (let i = 0; i < selectedRecipes.length; i++) {
+    const recipeId = parseInt(selectedRecipes[i]);
+    if (!isNaN(recipeId)) {
+      selectedRecipeIds.push(recipeId);
+    }
+  }
+
   const { loading, error, data } = useQuery(GETALL_CONS, {
     variables: { userId: parseInt(userId) },
   });
-  console.log("dataFromDB", data);
+  console.log("dataConsomation:", data);
+  console.log("userId:", userId);
+
+  const {
+    data: recipeData,
+    loading: recipeLoading,
+    error: recipeError,
+  } = useQuery(GET_RECIPES_BY_IDS, {
+    variables: { input: { ids: selectedRecipeIds } },
+  });
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (recipeError) {
     return <div>Error occurred.</div>;
   }
+
+  // new code
+  let totalCalculation = 0;
+  if (recipeData) {
+    totalCalculation = recipeData.getRecipesByIds.reduce(
+      (total: any, recipe: any) => {
+        // Assuming "calcul" is a numeric property, parse and add it to the total
+        const numericValue = parseFloat(recipe.calcul);
+        return isNaN(numericValue) ? total : total + numericValue;
+      },
+      0
+    );
+  }
+  // end new code
 
   let consumptionData: ConsumptionData[] = [];
   if (data && data.getConsByUser) {
@@ -31,7 +72,7 @@ const Recap = () => {
       y: parseFloat(consumption.empreinte),
     }));
 
-    console.log("consumptionData", consumptionData);
+    console.log("thisUserConsumptionData", consumptionData);
   }
 
   // const customTickFormat = (tick: any) => {
@@ -46,7 +87,7 @@ const Recap = () => {
       : new Date();
 
   return (
-    <div>
+    <div className={"recapPage container"}>
       {/* {data && data.getConsByUser && (
         <ul>
           {data.getConsByUser.map((consumption: any) => (
@@ -58,21 +99,31 @@ const Recap = () => {
         </ul>
       )} */}
 
+      {recipeData && (
+        <RecipeList
+          recipeData={recipeData.getRecipesByIds}
+          totalCalculation={totalCalculation}
+        />
+      )}
+
       {data && data.getConsByUser && (
-        <VictoryChart
-          height={200}
-          width={800}
-          scale={{ x: "time", y: "linear" }}
-          domain={{
-            // x: [new Date("2023-05-01"), new Date("2023-06-30")],
-            x: [minDate, maxDate],
-            y: [0, 10],
-          }}
-        >
-          <VictoryAxis tickFormat={(date) => date.toLocaleDateString()} />
-          <VictoryAxis dependentAxis />
-          <VictoryLine data={consumptionData} />
-        </VictoryChart>
+        <div className={"chart-container"}>
+          <h2>Votre graphique hebdomadaire</h2>
+          <VictoryChart
+            height={200}
+            width={800}
+            scale={{ x: "time", y: "linear" }}
+            domain={{
+              // x: [new Date("2023-05-01"), new Date("2023-06-30")],
+              x: [minDate, maxDate],
+              y: [0, 10],
+            }}
+          >
+            <VictoryAxis tickFormat={(date) => date.toLocaleDateString()} />
+            <VictoryAxis dependentAxis />
+            <VictoryLine data={consumptionData} />
+          </VictoryChart>
+        </div>
       )}
     </div>
   );

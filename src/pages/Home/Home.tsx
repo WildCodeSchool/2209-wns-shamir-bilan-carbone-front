@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -13,14 +13,18 @@ const Home = () => {
             repas quotidiens.
           </h1>
           <p>
-            descriptive text Le Lorem Ipsum est simplement du faux texte employé
-            dans la composition et la mise en page avant impression. Le Lorem
-            Ipsum est le faux texte standard de l'imprimerie depuis les années
-            1500, quand un imprimeur anonyme ass embla ensemble des morceaux de
-            texte pour réaliser un livre spécimen de polices de texte. Il n'a
-            pas fait que.
+            Plongez dans un monde de choix alimentaires délicieux et durables
+            avec Just Reduce ! Notre application est votre partenaire idéal pour
+            réduire votre empreinte carbone quotidienne. Nous sommes déterminés
+            à faire de chaque repas une opportunité de contribuer à un avenir
+            plus propre et plus respectueux de la planète.
           </p>
-          <button>Inscrivez vous</button>
+          <button>
+            {" "}
+            <Link to="/register" className="btn-link">
+              Inscrivez vous
+            </Link>
+          </button>
         </div>
         <div className={"wrapp"}>
           <img src="https://picsum.photos/id/429/300/300" alt="sample image" />
@@ -28,55 +32,58 @@ const Home = () => {
       </div>
       <div className="block-2">
         <div className={"wrapp"}>
-          <img src="https://picsum.photos/200/200" alt="sample image" />
+          <img src="/assets/step1.jpg" alt="image step 1" />
           <div className={"inner-wrapp"}>
             <h2>Choissiez recettes</h2>
             <p>
-              On sait depuis longtemps que travailler avec du texte lisible et
-              contenant du sens est source de distractions, et empêche de se
-              concentrer sur la mise en page elle-même. L'avantage du Lorem
-              Ipsum sur un texte générique comme 'Du texte.{" "}
+              Choisissez des recettes savoureuses tout en réduisant votre impact
+              environnemental. Rejoignez-nous pour explorer des options
+              délicieuses et durables.
             </p>
           </div>
         </div>
 
         <div className={"wrapp"}>
-          <img src="https://picsum.photos/200/200" alt="sample image" />
+          <img src="/assets/step2.jpg" alt="image step 2" />
           <div className={"inner-wrapp"}>
             <h2>Suivez votre consumption</h2>
             <p>
-              On sait depuis longtemps que travailler avec du texte lisible et
-              contenant du sens est source de distractions, et empêche de se
-              concentrer sur la mise en page elle-même. L'avantage du Lorem
-              Ipsum sur un texte générique comme 'Du texte.{" "}
+              Suivez votre consommation alimentaire pour mieux comprendre son
+              impact sur la planète. Connectez-vous pour commencer à enregistrer
+              vos choix alimentaires.
             </p>
           </div>
         </div>
 
         <div className={"wrapp"}>
-          <img src="https://picsum.photos/200/200" alt="sample image" />
+          <img src="/assets/step3.jpg" alt="image step 3" />
           <div className={"inner-wrapp"}>
             <h2>Diminuez votre empreinte carbone</h2>
             <p>
-              On sait depuis longtemps que travailler avec du texte lisible et
-              contenant du sens est source de distractions, et empêche de se
-              concentrer sur la mise en page elle-même. L'avantage du Lorem
-              Ipsum sur un texte générique comme 'Du texte.{" "}
+              Diminuez votre empreinte carbone en prenant des décisions
+              éclairées sur vos repas. Inscrivez-vous aujourd'hui pour un mode
+              de vie plus durable.
             </p>
           </div>
         </div>
 
-        <button>Inscrivez vous</button>
+        <button>
+          <Link to="/register" className="btn-link">
+            Inscrivez vous
+          </Link>
+        </button>
       </div>
 
       <div className="block-3">
         <div className="wrapp">
           <h1>Avantages</h1>
           <p>
-            On sait depuis longtemps que travailler avec du texte lisible et
-            contenant du sens est source de distractions, et empêche de se
-            concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum
-            sur un texte générique comme 'Du texte. Du texte
+            Vous gagnez une meilleure compréhension de l'impact de vos choix
+            alimentaires sur la planète, ce qui vous permet de faire des
+            décisions plus éclairées. En adoptant des pratiques alimentaires
+            plus durables, vous pouvez réduire vos dépenses alimentaires à long
+            terme. Ensemble, nous pouvons faire une différence positive pour la
+            planète.
           </p>
         </div>
 
@@ -84,29 +91,31 @@ const Home = () => {
           <div className="inner-wrapp-facts">
             <h3>Fact 1</h3>
             <p>
-              descriptive text Le Lorem Ipsum est simplement du faux texte
-              employé dans la composition et la mise en page avant impression.
-              Le Lorem Ipsum est le faux texte standard de.
+              Saviez-vous que chaque repas compte dans la réduction des
+              émissions de carbone ? Connectez-vous pour en apprendre davantage.
             </p>
           </div>
           <div className="inner-wrapp-facts">
             <h3>Fact 2</h3>
             <p>
-              descriptive text Le Lorem Ipsum est simplement du faux texte
-              employé dans la composition et la mise en page avant impression.
-              Le Lorem Ipsum est le faux texte standard de.
+              La planète vous remercie lorsque vous réduisez votre empreinte
+              carbone. Inscrivez-vous et découvrez comment.
             </p>
           </div>
           <div className="inner-wrapp-facts">
             <h3>Fact 3</h3>
             <p>
-              descriptive text Le Lorem Ipsum est simplement du faux texte
-              employé dans la composition et la mise en page avant impression.
-              Le Lorem Ipsum est le faux texte standard de.
+              Chaque petit geste compte. Connectez-vous et explorez comment vos
+              choix alimentaires peuvent avoir un impact positif sur
+              l'environnement.
             </p>
           </div>
         </div>
-        <button>Inscrivez vous</button>
+        <button>
+          <Link to="/register" className="btn-link">
+            Inscrivez vous
+          </Link>
+        </button>
       </div>
     </Container>
   );

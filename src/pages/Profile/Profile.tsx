@@ -47,7 +47,6 @@ const Profile = () => {
   console.log("fetched-recipe-data", data);
 
   const handleCheckboxChange = (recipeId: string) => {
-    console.log("recipeId:", typeof recipeId);
     // Check if the recipe is already selected, and update the selectedRecipes state accordingly
     const isSelected = selectedRecipes.includes(recipeId);
     if (isSelected) {
@@ -81,7 +80,12 @@ const Profile = () => {
 
       console.log("Consumption created:", data.createConsumptionWithRecipeUser);
       if (data.createConsumptionWithRecipeUser) {
-        navigate(`/profile/recap/${userId}`);
+        // navigate(`/profile/recap/${userId}`);
+        navigate(
+          `/profile/recap/${userId}?selectedRecipes=${selectedRecipes.join(
+            ","
+          )}`
+        );
       }
       // Handle the response from the backend, e.g.,  notification or navigate to a new page
     } catch (error) {
@@ -92,34 +96,42 @@ const Profile = () => {
   };
 
   return (
-    <div id={"profilePage"} className="recipes-container container">
-      {data?.getAllRecipes.map((recipe: Recipe) => {
-        console.log(selectedRecipes.includes(recipe.id), typeof recipe.id);
-        return (
-          <div className="recipe-card" key={recipe.id}>
-            <h4>{recipe.name} </h4>
-            <p>{recipe.description}</p>
-            {/* <img src="https://picsum.photos/200/200" alt={recipe.name} /> */}
-            <img
-              src="https://www.bettybossi.ch/rdbimg/bb_mcco170508_0010a/bb_mcco170508_0010a_r01_v005_x0010.jpg"
-              alt={recipe.name}
-            />
-
-            <h5>
-              <span className="carbone">CO2:</span> {recipe.calcul}
-            </h5>
-            <input
-              type="checkbox"
-              className="checkbox-recipe"
-              checked={selectedRecipes.includes(recipe.id)}
-              onChange={() => handleCheckboxChange(recipe.id)}
-            />
-          </div>
-        );
-      })}
-      <button className="submit-button" onClick={handleSubmitChecked}>
-        Sauvegarder
-      </button>
+    <div id={"profilePage"} className="container">
+      <h1>
+        Bienvenue à Just Reduce, où chaque inscription contribue à un avenir
+        plus vert et plus durable !
+      </h1>
+      <h2>Choisissez les recettes d'aujourd'hui</h2>
+      <div className="recipes-container">
+        {data?.getAllRecipes.map((recipe: Recipe) => {
+          console.log(selectedRecipes.includes(recipe.id), typeof recipe.id);
+          return (
+            <div className="recipe-card" key={recipe.id}>
+              {/* <img src="https://picsum.photos/200/200" alt={recipe.name} /> */}
+              <div className={"recipe-image-wrap"}>
+                <img
+                  src="https://www.bettybossi.ch/rdbimg/bb_mcco170508_0010a/bb_mcco170508_0010a_r01_v005_x0010.jpg"
+                  alt={recipe.name}
+                />
+              </div>
+              <h4>{recipe.name} </h4>
+              {/* <p>{recipe.description}</p> */}
+              <h5>
+                <span className="carbone">CO2:</span> {recipe.calcul}
+              </h5>
+              <input
+                type="checkbox"
+                className="checkbox-recipe custom-checkbox"
+                checked={selectedRecipes.includes(recipe.id)}
+                onChange={() => handleCheckboxChange(recipe.id)}
+              />
+            </div>
+          );
+        })}
+        <button className="submit-button" onClick={handleSubmitChecked}>
+          Sauvegarder
+        </button>
+      </div>
     </div>
   );
 };

@@ -45,6 +45,27 @@ export const GETALL_RECIPES = gql`
   }
 `;
 
+export const GET_RECIPE_BY_ID = gql`
+  query Query($recipeId: Float!) {
+    getRecipeById(recipeId: $recipeId) {
+      id
+      name
+      description
+      calcul
+    }
+  }
+`;
+
+export const GET_RECIPES_BY_IDS = gql`
+  query Query($input: RecipeIdsInput!) {
+    getRecipesByIds(input: $input) {
+      id
+      name
+      calcul
+    }
+  }
+`;
+
 export const GET_USER_BY_EMAIL = gql`
   query ExampleQuery($email: String!) {
     findUserByEmail(email: $email) {
