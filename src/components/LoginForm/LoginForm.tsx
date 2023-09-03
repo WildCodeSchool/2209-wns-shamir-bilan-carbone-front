@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { AuthContext } from "../../context/authContext";
+// import { UserContext } from "../../context/user.context";
 import { Link } from "react-router-dom";
 
 interface LoginData {
@@ -10,6 +11,8 @@ interface LoginData {
 
 export default function LoginForm() {
   const { login } = useContext(AuthContext);
+  // const { setCurrentUser } = useContext(UserContext);
+
   const [state, setState] = useState<LoginData>({
     email: "",
     password: "",
@@ -26,6 +29,10 @@ export default function LoginForm() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     login(state.email, state.password);
+
+    // new code for context.user
+    // setCurrentUser(login)
+    //end new code
   };
 
   return (

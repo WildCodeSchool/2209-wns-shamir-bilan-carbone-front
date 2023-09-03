@@ -8,6 +8,7 @@ import { GETALL_RECIPES } from "../../gql/queries";
 import { GETALL_USERS } from "../../gql/queries";
 import { DELETE_USER } from "../../gql/mutations";
 import jwtDecode from "jwt-decode";
+import { useRecipes } from "../../context/recipesContext";
 
 interface Recipe {
   id: string;
@@ -28,6 +29,15 @@ const Admin = () => {
   // Check if has role Admin to access page /admin
   const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
+
+  // new
+  const { refetch: refetchRecipes } = useQuery(GETALL_RECIPES);
+  const { refetch: refetchUsers } = useQuery(GETALL_USERS);
+
+  const { recipes } = useRecipes();
+  // const { recipes, addRecipe, deleteRecipeWithTimeout } = useRecipeContext();
+  // endnew
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -39,6 +49,9 @@ const Admin = () => {
         navigate("/");
       }
     }
+
+    refetchRecipes();
+    refetchUsers();
   }, []);
 
   const {
@@ -60,7 +73,8 @@ const Admin = () => {
   const [showDeleteButton, setShowDeleteButton] = useState(true);
   const [titleText, setTitleText] = useState("Titre");
   const [descriptionText, setDescriptionText] = useState("Description");
-  const [co2Text, setCo2Text] = useState("1.00");
+  const [co2Text, setCo2Text] = useState("0.00");
+  const [randomImg, setRandomImg] = useState(getRandomNumber());
 
   const handlePreview = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitleText(event.target.value);
@@ -129,8 +143,16 @@ const Admin = () => {
   let sumUsers = userOptions.length;
   let sumRecipes = recipeOptions.length;
 
+  function getRandomNumber() {
+    const randomDecimal = Math.random();
+    const min = 1;
+    const max = 16;
+    const randomNumber = Math.floor(randomDecimal * (max - min + 1)) + min;
+    return randomNumber;
+  }
+
   return (
-    <Container>
+    <Container id={"adminPage"}>
       <Row className={"text-center mt-5"}>
         {/* User Search Field */}
         <SearchField
@@ -248,6 +270,21 @@ const Admin = () => {
         </Col>
       </Row>
 
+      {/* new code */}
+      <div className="recipes-admin-container">
+        {recipes.map((recipe: Recipe) => (
+          <div key={recipe.id}>
+            <h5>
+              {" "}
+              La recette <span>{recipe.name} </span> est ajoutée. La valeur du
+              CO2:
+              <span className={"carbon-value"}>{recipe.calcul} </span>
+            </h5>
+          </div>
+        ))}
+      </div>
+      {/* end new code */}
+
       {isShownRecipeForm && (
         <Container className={"show mt-3 create-container"}>
           <Row className={" mt-5"}>
@@ -271,7 +308,7 @@ const Admin = () => {
                 <p>{descriptionText}</p>
                 <h5>CO²: {co2Text} </h5>
                 <img
-                  src="https://picsum.photos/200/200"
+                  src={`/assets/meals/food${randomImg}.jpg`}
                   alt="Recipe example image"
                 />
               </Container>

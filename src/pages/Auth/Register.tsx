@@ -34,7 +34,7 @@ export default function Register() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" id={"registerPage"}>
       <Typography variant="h4" component="h1" style={{ paddingTop: "50px" }}>
         Création de compte
       </Typography>

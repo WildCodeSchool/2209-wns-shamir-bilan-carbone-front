@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
 import { AuthProvider } from "./context/authContext";
+import { RecipesProvider } from "./context/recipesContext";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:5002/graphql",
@@ -40,7 +41,9 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <React.StrictMode>
-          <App />
+          <RecipesProvider>
+            <App />
+          </RecipesProvider>
         </React.StrictMode>
       </AuthProvider>
     </BrowserRouter>

@@ -5,13 +5,16 @@ import { CREATE_CONSUMPTION } from "../../gql/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { useRecipes } from "../../context/recipesContext";
 
-interface User {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
+// import IUser from "../../interfaces/IUser";
+
+// interface User {
+//   id: number;
+//   email: string;
+//   firstName: string;
+//   lastName: string;
+// }
 
 interface Recipe {
   id: string;
@@ -23,6 +26,11 @@ interface Recipe {
 const Profile = () => {
   const authToken = localStorage.getItem("token");
   console.log(localStorage.getItem("token"));
+
+  // new
+  const { recipes } = useRecipes();
+  //end new
+
   let userEmail = "";
   const navigate = useNavigate();
   if (authToken) {
@@ -44,6 +52,9 @@ const Profile = () => {
 
   if (loading) return <p>Loading recipes...</p>;
   if (error) return <p>Error fetching recipes...</p>;
+  if (userLoading) return <p>Loading user...</p>;
+  if (userError) return <p>Error fetching user...</p>;
+
   console.log("fetched-recipe-data", data);
 
   const handleCheckboxChange = (recipeId: string) => {
@@ -78,6 +89,8 @@ const Profile = () => {
         },
       });
 
+      console.log("wanttoknowdata", data.createConsumptionWithRecipeUser);
+
       console.log("Consumption created:", data.createConsumptionWithRecipeUser);
       if (data.createConsumptionWithRecipeUser) {
         // navigate(`/profile/recap/${userId}`);
@@ -95,6 +108,14 @@ const Profile = () => {
     console.log("selectedRecipes", selectedRecipes);
   };
 
+  function getRandomNumber() {
+    const randomDecimal = Math.random();
+    const min = 1;
+    const max = 16;
+    const randomNumber = Math.floor(randomDecimal * (max - min + 1)) + min;
+    return randomNumber;
+  }
+
   return (
     <div id={"profilePage"} className="container">
       <h1>
@@ -102,15 +123,16 @@ const Profile = () => {
         plus vert et plus durable !
       </h1>
       <h2>Choisissez les recettes d'aujourd'hui</h2>
+
       <div className="recipes-container">
         {data?.getAllRecipes.map((recipe: Recipe) => {
-          console.log(selectedRecipes.includes(recipe.id), typeof recipe.id);
+          const randomImg = getRandomNumber();
+          // console.log(selectedRecipes.includes(recipe.id), typeof recipe.id);
           return (
             <div className="recipe-card" key={recipe.id}>
-              {/* <img src="https://picsum.photos/200/200" alt={recipe.name} /> */}
               <div className={"recipe-image-wrap"}>
                 <img
-                  src="https://www.bettybossi.ch/rdbimg/bb_mcco170508_0010a/bb_mcco170508_0010a_r01_v005_x0010.jpg"
+                  src={`/assets/meals/food${randomImg}.jpg`}
                   alt={recipe.name}
                 />
               </div>
@@ -132,6 +154,16 @@ const Profile = () => {
           Sauvegarder
         </button>
       </div>
+
+      {/* new code */}
+      <div className="recipes-admin-container">
+        {recipes.map((recipe: Recipe) => (
+          <div className="recipe-card" key={recipe.id}>
+            <h4>{recipe.name} </h4>
+          </div>
+        ))}
+      </div>
+      {/* end new code */}
     </div>
   );
 };

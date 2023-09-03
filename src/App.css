@@ -26,26 +26,42 @@
   --font_manuscrit: 'Kaushan Script', cursive;
 }
 
-body {
-  background-color: var(--white);
-  color: var(--black);
-  font-family: var(--font);
-}
-
 h1,
 h2 {
   color: var(--green-dark);
 }
 
-.color-test {
-  background-color: aquamarine;
+#homepage,
+#recapPage,
+#profilePage,
+#adminPage,
+#loginPage,
+#registerPage,
+#legalPage {
+  min-height: 53vh;
+  margin-top: 300px;
 }
 
+@media screen and (min-width: 990px) {
 
+  #homepage,
+  #recapPage,
+  #profilePage,
+  #adminPage,
+  #loginPage,
+  #registerPage,
+  #legalPage {
+    margin-top: 17vh;
+  }
+}
 
-/* span {
-  color: var(--red);
-} */
+#navigationBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
 .block-span {
   display: block;
@@ -282,15 +298,35 @@ h2 {
   color: rgb(196, 193, 193);
 }
 
+.recipe-preview img {
+  height: 200px;
+  width: 200px;
+}
+
 .home-container {
   padding: 0 2em !important;
-  margin-top: 2em;
+  /* margin-top: 2em; */
 }
 
 .nav-container {
   padding-left: 2em !important;
   padding-right: 2em !important;
+}
 
+#adminPage .recipes-admin-container {
+  padding-top: 100px;
+}
+
+#adminPage .recipes-admin-container h4 {
+  font-weight: 600;
+}
+
+#adminPage .recipes-admin-container span {
+  color: var(--green)
+}
+
+#adminPage .recipes-admin-container .carbon-value {
+  padding-left: 5px;
 }
 
 #homepage .block-1 {
@@ -665,11 +701,19 @@ h2 {
   margin-top: 20px;
   padding: 20px;
   border-radius: 8px;
-  width: 40%;
+  width: 80%;
   height: auto;
   border-color: transparent;
   box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45);
 }
+
+@media screen and (min-width: 900px) {
+  .recapPage .choiceList {
+    width: 40%;
+    height: auto;
+  }
+}
+
 
 .recapPage .choiceList h2,
 .recapPage .choiceList h3 {
@@ -702,4 +746,80 @@ h2 {
 .custom-chart {
   font-size: 12px;
   border: 1px solid #ccc;
+}
+
+/* FOOTER */
+
+.footer {
+  background-color: #f7f0f0;
+  color: var(--black-text);
+  padding: 3rem 2rem;
+  margin-top: 1rem;
+  bottom: 0;
+  /* width: 100%; */
+  height: auto;
+}
+
+.footer div p {
+  margin: 0;
+}
+
+.footer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  width: 80%;
+}
+
+.footer h4 {
+  /* color: white; */
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  /* margin-bottom: 1rem; */
+}
+
+.footer a {
+  color: rgb(185, 185, 185);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--green);
+}
+
+@media (min-width: 765px) {
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 30vh;
+  }
+
+  .footer div {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .copyright {
+    display: inline-block;
+    text-align: center;
+    width: 300px;
+    margin-top: 2em;
+  }
+}
+
+/* LEGAL */
+.left-align-text {
+  text-align: left;
+}
+
+#legalPage .legal-title {
+  padding-top: 20px;
+  text-align: left;
 }

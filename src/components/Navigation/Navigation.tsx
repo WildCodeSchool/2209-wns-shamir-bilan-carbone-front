@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
@@ -7,6 +7,7 @@ import { UPDATE_USER } from "../../gql/mutations";
 import EditUser from "../User/EditUser";
 import jwtDecode from "jwt-decode";
 import IUser from "../../interfaces/IUser";
+import { AuthContext } from "../../context/authContext";
 
 interface NavigationProps {
   userInfo?: IUser;
@@ -21,19 +22,25 @@ interface NavigationProps {
 
 const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
   const navigate = useNavigate();
+  // const { currentUser } = useContext(UserContext);
+  // const { login } = useContext(AuthContext);
 
   //This line retrieves the value of the "token" key from the local storage
   // and assigns it to the authToken variable. It represents the user's authentication token stored in the browser's local storage.
-  // const authToken = localStorage.getItem("token");
 
   // So I put authToken in State
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [userFirstName, setUserFirstName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false); // Initialize isAdmin as a state variable
+  const [userId, setUserId] = useState<string | null>(null);
+  const { currentUser, login } = useContext(AuthContext);
+  console.log("printCurrentUser", currentUser);
+
   // let isAdmin = false;
   // let userFirstName = "";
   // let userEmail = "";
+  // let theUserId = "";
 
   // I use UseEffect to use LocalStorage in state
   useEffect(() => {
@@ -51,6 +58,7 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
         setUserFirstName(tokenPayload.firstName.charAt(0).toUpperCase());
         // userEmail = tokenPayload.email;
         setUserEmail(tokenPayload.email);
+        setUserId(tokenPayload.userId); // Set userId here
       }
       if (tokenPayload && tokenPayload.role === "ADMIN") {
         setIsAdmin(true);
@@ -64,8 +72,7 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
     loading: userLoading,
     error: userError,
   } = useQuery(GET_USER_BY_EMAIL, { variables: { email: userEmail } });
-
-  console.log("userData", userData);
+  // console.log("userData", userData.findUserByEmail.id);
 
   const [updateUser] = useMutation(UPDATE_USER);
   const handleUpdateUser = async (
@@ -135,9 +142,17 @@ const Navigation = ({ firstNamePayload, lastNamePayload }: NavigationProps) => {
           </Nav>
 
           <Nav>
+            {/* {authToken && userId && ( */}
             {authToken && (
               <NavDropdown title="Mon compte" id="collasible-nav-dropdown">
-                <Nav.Link as={Link} to="/profile/recap">
+                {/* <Nav.Link as={Link} to="/profile/recap"> */}
+                {/* <Nav.Link as={Link} to={`/profile/recap/${userId}`}> */}
+                <Nav.Link
+                  as={Link}
+                  to={`/profile/recap/${Number(
+                    userData.findUserByEmail.id
+                  )}?selectedRecipes=0`}
+                >
                   Récapitulatif
                 </Nav.Link>
                 <Nav.Link as={Link} to="/profile/recap">

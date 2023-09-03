@@ -6,6 +6,7 @@ import makeAnimated from "react-select/animated";
 import { GETALL_ALIMENTS } from "../../gql/queries";
 import { CREATE_RECIPE } from "../../gql/mutations";
 import { useNavigate } from "react-router-dom";
+import { useRecipes } from "../../context/recipesContext";
 
 interface AgribalyseData {
   id: number;
@@ -21,6 +22,9 @@ interface CreateRecipeFormProps {
 
 // export default function CreateRecipeForm() {
 const CreateRecipeForm = (props: any) => {
+  // new
+  const { setRecipes } = useRecipes();
+  // end new
   const animatedComponents = makeAnimated();
   const {
     data: queryData,
@@ -64,23 +68,70 @@ const CreateRecipeForm = (props: any) => {
     useMutation(CREATE_RECIPE, {
       onCompleted: (mutationData) => {
         if (mutationData.createRecipe) {
+          // navigate("/profile/recipes");
           navigate("/admin");
         }
       },
     });
 
-  const handleCreateRecipe = (event: React.FormEvent<HTMLFormElement>) => {
+  // const handleCreateRecipe = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const agribalyseIds = selectedAliments;
+  //   createRecipe({
+  //     variables: {
+  //       name,
+  //       description,
+  //       empreinte: calculEmpreinte,
+  //       agribalyseIds,
+  //     },
+  //   });
+  // };
+
+  // start new
+
+  const handleCreateRecipe = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     const agribalyseIds = selectedAliments;
-    createRecipe({
-      variables: {
-        name,
-        description,
-        empreinte: calculEmpreinte,
-        agribalyseIds,
-      },
-    });
+
+    try {
+      const { data } = await createRecipe({
+        variables: {
+          name,
+          description,
+          empreinte: calculEmpreinte,
+          agribalyseIds,
+        },
+      });
+
+      if (data.createRecipe) {
+        // Reload the page to fetch the updated list of recipes
+        // window.location.reload();
+
+        // new code
+        setRecipes((prevRecipes) => [
+          ...prevRecipes,
+          {
+            id: data.createRecipe.id,
+            name,
+            description,
+            calcul: calculEmpreinte,
+          },
+        ]);
+
+        // Clear the form fields
+        setName("");
+        setDescription("");
+        setSelectedAliments([]);
+        //end new code
+      }
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+    }
   };
+
+  // end new
 
   if (queryLoading || mutationLoading) return <p>Loading...</p>;
   console.log(mutationError);
